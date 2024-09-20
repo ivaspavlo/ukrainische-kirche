@@ -43,7 +43,8 @@ Thumbs.db
 
 # Firebase
 /.firebase
-firebase-debug.log
+# firebase-debug.log
 
+# Folders used by ESLint
 .nx/cache
 .nx/workspace-data
