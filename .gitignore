@@ -42,8 +42,10 @@ testem.log
 Thumbs.db
 
 # Firebase
-/.firebase
-# firebase-debug.log
+.firebase
+firebase-debug.log
+.firebase.config.js
+src/assets/config/firebase*.config.ts
 
 # Folders used by ESLint
 .nx/cache

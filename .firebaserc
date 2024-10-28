@@ -1,5 +1,6 @@
 {
   "projects": {
-    "default": "u-kirche"
+    "default": "u-kirche-dev",
+    "prod": "u-kirche-prod"
   }
 }
