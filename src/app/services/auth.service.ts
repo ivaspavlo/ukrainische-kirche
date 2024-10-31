@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable, inject } from '@angular/core';
 import { API_URL } from '@env/environment';
 import { getAuth, signInWithEmailAndPassword } from 'firebase/auth';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -23,13 +24,15 @@ export class AuthService {
       });
   }
 
-  public signin(email: string, password: string): any {
-    // validateUserName(body[UserClientModel.kName]);
-    // validateUserEmail(body[UserClientModel.kEmail]);
-    // validateUserRole(body[UserClientModel.kRole]);
-    // validateUserBirthDate(body[UserClientModel.kBirthDateMillisecondsSinceEpoch]);
-    // validateUserPassword(body[UserClientModel.kPassword]);
-    
-    this.#http.post<any>(`${API_URL}/account`, {});
+  public signin(email: string, password: string): Observable<unknown> {
+    const body = {
+      email,
+      password,
+      name: 'Test1',
+      role: 'manager',
+      birthDateMs: Date.now()
+    }
+    debugger;
+    return this.#http.post<unknown>(`${API_URL}/account`, body);
   }
 }
