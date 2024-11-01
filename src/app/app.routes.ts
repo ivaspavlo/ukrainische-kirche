@@ -1,8 +1,35 @@
 import { Routes } from '@angular/router';
+import { provideState } from '@ngrx/store';
+import { provideEffects } from '@ngrx/effects';
 
-export const routes: Routes = [
+import * as adminState from './features/admin';
+
+export enum CORE_ROUTE_NAMES {
+  HOME = 'home',
+  ADMIN = 'admin'
+}
+
+export const CORE_ROUTES: Routes = [
   {
-    path: 'auth',
-    loadChildren: () => import('./features/auth/auth.routes').then((m) => m.AUTH_ROUTES),
+    path: '',
+    children: [
+      {
+        path: CORE_ROUTE_NAMES.HOME,
+        loadChildren: () => import('./features/home/home.routes').then((m) => m.HOME_ROUTES)
+      },
+      {
+        path: CORE_ROUTE_NAMES.ADMIN,
+        providers: [
+          provideState(adminState.ADMIN_FEATURE_KEY, adminState.reducer),
+          provideEffects([])
+        ],
+        loadChildren: () => import('./features/admin/admin.routes').then((m) => m.ADMIN_ROUTES),
+      },
+      {
+        path: '',
+        pathMatch: 'full',
+        redirectTo: CORE_ROUTE_NAMES.HOME
+      }
+    ]
   }
 ];

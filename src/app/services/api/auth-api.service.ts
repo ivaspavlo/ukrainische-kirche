@@ -1,13 +1,14 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable, inject } from '@angular/core';
-import { API_URL } from '@env/environment';
 import { getAuth, signInWithEmailAndPassword } from 'firebase/auth';
 import { Observable } from 'rxjs';
+
+import { API_URL } from '@env/environment';
 
 @Injectable({
   providedIn: 'root'
 })
-export class AuthService {
+export class AuthApiService {
   #http: HttpClient = inject(HttpClient);
 
   constructor() { }
@@ -30,9 +31,8 @@ export class AuthService {
       password,
       name: 'Test1',
       role: 'manager',
-      birthDateMs: Date.now()
+      birthDateMs: 576453600000
     }
-    debugger;
     return this.#http.post<unknown>(`${API_URL}/account`, body);
   }
 }
